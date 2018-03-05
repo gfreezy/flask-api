@@ -7,16 +7,14 @@ name = "pypi"
 
 [packages]
 
-pylint = "*"
+
 flask = "*"
 ujson = "*"
 pydantic = "*"
-"autopep8" = "*"
-
 
 [dev-packages]
-
-
+"autopep8" = "*"
+pylint = "*"
 
 [requires]
 
