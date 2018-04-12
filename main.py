@@ -96,7 +96,7 @@ class Resp(BaseModel):
 
 
 class App(Flask):
-    def route(self, rule, **options):
+    def rpc_route(self, rule, **options):
         orig_decorator = super().route(rule, methods=['POST', 'GET'], **options)
 
         def decorator(f):
@@ -120,19 +120,22 @@ class App(Flask):
 
         return decorator
 
+    def rpc(self, f):
+        return self.rpc_route(f'/{f.__name__}.json')(f)
+
 
 app = App('typing')
 
 
-@app.route('/')
+@app.rpc
 def index(req: Req) -> Resp:
-    '''index'''
+    """index"""
     return Resp(reply="1")
 
 
-@app.route('/doc')
+@app.rpc_route('/ddd')
 def doc() -> Resp:
-    '''doc'''
+    """doc"""
     return Resp(reply="1")
 
 
